@@ -35,22 +35,25 @@ train_generator = image_datagen.flow_from_directory(
     'data/train',
     target_size=(150, 150),
     batch_size=batch_size,
-    class_mode='binary'
+    class_mode='sparse'
 )
 
 validation_generator = image_datagen.flow_from_directory(
     'data/validation',
     target_size=(150, 150),
     batch_size=batch_size,
-    class_mode='binary'
+    class_mode='sparse'
 )
 
 model.fit_generator(
     train_generator,
     steps_per_epoch=2000 // batch_size,
-    epochs=10,
+    epochs=5,
     validation_data=validation_generator,
     validation_steps=800 // batch_size
 )
 
+print(validation_generator.class_indices)
+
 model.save_weights('saved_weights.h5')
+model.save('saved_model')
