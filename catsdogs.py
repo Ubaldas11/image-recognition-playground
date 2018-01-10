@@ -4,6 +4,8 @@ from keras.layers import Conv2D, MaxPooling2D
 from keras.layers import Activation, Dropout, Flatten, Dense
 
 batch_size = 16
+train_images_count = 8000
+validate_images_count = 2000
 
 model = Sequential()
 model.add(Conv2D(32, (3, 3), input_shape=(150, 150, 3)))
@@ -35,22 +37,23 @@ train_generator = image_datagen.flow_from_directory(
     'data/train',
     target_size=(150, 150),
     batch_size=batch_size,
-    class_mode='sparse'
+    class_mode='binary'
 )
 
 validation_generator = image_datagen.flow_from_directory(
     'data/validation',
     target_size=(150, 150),
     batch_size=batch_size,
-    class_mode='sparse'
+    class_mode='binary'
 )
-
+# 1 epochoj 500 (steps_per_epoch) kartu yra paimama po 16 (batch_size) fotkiu
+# ir paleidziama per tinkla
 model.fit_generator(
     train_generator,
-    steps_per_epoch=2000 // batch_size,
-    epochs=5,
+    steps_per_epoch=train_images_count // batch_size,
+    epochs=30,
     validation_data=validation_generator,
-    validation_steps=800 // batch_size
+    validation_steps=validate_images_count // batch_size
 )
 
 print(validation_generator.class_indices)

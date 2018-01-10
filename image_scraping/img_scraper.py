@@ -30,7 +30,7 @@ def get_photos(keyword, size='original', max_nb_img=-1):
     
     urls = []
     count = 0
-    
+    print("Starting Flickr scraping for images with '" + keyword + "'")
     for photo in photos:
         t = randint(1, 3)
         time.sleep(t)
