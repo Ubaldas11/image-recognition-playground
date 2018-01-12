@@ -3,14 +3,6 @@ from keras.preprocessing import image
 import os
 import numpy as np
 
-def printCurrClass(classStr):
-    if (classStr == "0"):
-        print("Cats. Expected outcome: 0 OR first hot in array")
-    if (classStr == "1"):
-        print("Dogs. Expected outcome: 1 OR second hot in array")
-    if (classStr == "2"):
-        print("Ducks. Expected outcome: 2 OR third hot in array")
-
 model = load_model('great_model_ducks')
 path = "C:\\Dev\\AI\\2U\\data\\validation\\ducks"
 totalImagesShown = 500

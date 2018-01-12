@@ -46,8 +46,6 @@ validation_generator = image_datagen.flow_from_directory(
     class_mode='categorical'
 )
 
-# 1 epochoj 500 (steps_per_epoch) kartu yra paimama po 16 (batch_size) fotkiu
-# ir paleidziama per tinkla
 model.fit_generator(
     train_generator,
     steps_per_epoch=train_images_count // batch_size,
